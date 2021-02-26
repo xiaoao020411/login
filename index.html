@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="reg" action="index.php">
+    <h3>添加学生</h3><br>
+    学生姓名：<input type="text" name="username"><br>
+    学生简历：<input type="text" name="mobile"><br>
+    <input type="submit" value="提交">
+</form>
+</body>
+<script src="jquery-3.5.1.min.js"></script>
+<script src="reg.js"></script>
+<script>
+    $("#reg").submit(function(ev){
+            ev.preventDefault()
+            var inputs = $("#reg :input").serialize()
+            console.log(inputs)
+
+            $.ajax({
+                method: 'post',      //请求方法
+                url: 'index.php',   //请求的地址
+                dataType: 'json',       // 将服务器返回的json转为 js对象
+                data: inputs           // $_GET['name']
+            }).done(function(d){            // done回调函数  d就是 服务器响应的数据
+                console.log(d)
+            })
+
+        })
+
+</script>
+</html>
